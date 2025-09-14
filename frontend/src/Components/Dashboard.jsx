@@ -8,6 +8,9 @@ import GoalsCard from "./DashBoard/GoalsCard";
 import TimeSpentCard from "./DashBoard/TimeSpentCard";
 import ActivityHeatmap from "./DashBoard/ActivityHeatMap";
 import NotesCard from "./DashBoard/NotesCard";
+import HackerEarthCard from "./DashBoard/HackerEarthCard";
+import HackerEarthProfilePage from "./DashBoard/HackerEarthProfilePage";
+
 
 export default function Dashboard() {
   const [profile, setProfile] = useState(null);
@@ -25,7 +28,7 @@ export default function Dashboard() {
           return;
         }
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
+  const res = await fetch(`/api/profile`, {
           headers: { "x-auth-token": token },
         });
 
@@ -57,9 +60,20 @@ export default function Dashboard() {
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
 
     {/* Row 1 */}
-    <ProfileCard user={profile} className="col-span-1" />
-    <PlatformLinks platforms={profile.platforms || []} className="col-span-1" />
-    <StreakCard streak={profile.streak || 0} className="col-span-1" />
+  <ProfileCard user={profile} className="col-span-1" />
+  {/* Always show HackerEarth profile info if username is set, else show card to prompt */}
+  {profile?.socialLinks?.hackerearth ? (
+    <div className="col-span-1">
+      <HackerEarthProfilePageStatic username={profile.socialLinks.hackerearth} />
+    </div>
+  ) : (
+    <HackerEarthCard link={profile?.socialLinks?.hackerearth} />
+  )}
+  <StreakCard streak={profile.streak || 0} className="col-span-1" />
+
+
+export default Dashboard;
+
 
     {/* Row 2: Goals, Time Spent, Notes */}
     <GoalsCard goals={goals} onGoalsChange={setGoals} />

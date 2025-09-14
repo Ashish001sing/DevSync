@@ -50,7 +50,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
+  const response = await fetch(`/api/profile`, {
           headers: {
             'x-auth-token': token
           }
@@ -121,7 +121,7 @@ const Profile = () => {
           throw new Error('Authentication required');
         }
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profile/generate-avatar`, {
+  const response = await fetch(`/api/profile/generate-avatar`, {
           method: 'POST',
           headers: {
             'x-auth-token': token
@@ -170,7 +170,7 @@ const Profile = () => {
         const formData = new FormData();
         formData.append('avatar', avatarFile);
 
-        const avatarResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/profile/avatar`, {
+  const avatarResponse = await fetch(`/api/profile/avatar`, {
           method: 'POST',
           headers: {
             'x-auth-token': token
@@ -207,7 +207,7 @@ const Profile = () => {
       };
 
       // Send update request to backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
+  const response = await fetch(`/api/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -54,6 +54,9 @@ app.use("/api/profile", generalMiddleware, require("./routes/profile"));
 // app.use("/api/contact",contactRouter);
 app.use("/api/contact", generalMiddleware, contactRouter);
 
+// HackerEarth profile API
+app.use("/api/hackerearth", require("./routes/hackerearth.route"));
+
 
 // Route to display the initial message on browser
 app.get("/", (req, res) => {
